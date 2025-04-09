@@ -19,11 +19,12 @@
   },
   "permissions": [
     "activeTab",
-    "scripting",
+    "clipboardWrite",
     "downloads"
   ],
   "host_permissions": [
     "https://chat.openai.com/*",
+    "https://chatgpt.com/*",
     "https://claude.ai/*",
     "https://poe.com/*"
   ],
@@ -31,6 +32,7 @@
     {
       "matches": [
         "https://chat.openai.com/*",
+        "https://chatgpt.com/*", 
         "https://claude.ai/*",
         "https://poe.com/*"
       ],
