@@ -45,9 +45,9 @@ document.getElementById('extractBtn').addEventListener('click', () => {
       if (browserAPI.runtime.lastError) {
         log(`Error: ${browserAPI.runtime.lastError.message}`);
         if (browserAPI.runtime.lastError.message.includes("Cannot access contents of url") ||
+            browserAPI.runtime.lastError.message.includes("Cannot access contents of url") ||
             browserAPI.runtime.lastError.message.includes("Could not establish connection")) {
-          log("Make sure you're on a chatgpt.com, claude.ai, or poe.com page and refresh if necessary.");
-        }
+          log("Make sure you're on a supported AI chat platform page (ChatGPT, Claude, or Poe) and refresh if necessary.");
       } else if (response) {
         response.logs?.forEach(logMessage => log(logMessage));
         if (response.error) {
