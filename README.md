@@ -10,7 +10,7 @@ ExportGPT is a browser extension that allows users to download conversations fro
 
 ## Installation
 ### For Google Chrome:
-1. Download the extension files from the [GitHub repository](https://github.com/Atheric-Ai/exportgpt).
+1. Download the extension files from the [GitHub repository](https://github.com/Atheric-Ai/exportgpt/releases/tag/v1.0.0).
 2. Open Google Chrome and navigate to `chrome://extensions/`.
 3. Enable "Developer mode" by toggling the switch in the top right corner.
 4. Click on "Load unpacked" in the top left corner.
@@ -18,7 +18,7 @@ ExportGPT is a browser extension that allows users to download conversations fro
 6. The extension should now appear in your list of installed extensions and in the Chrome toolbar.
 
 ### For Mozilla Firefox:
-1. Download the extension files from the [GitHub repository](https://github.com/Atheric-Ai/exportgpt).
+1. Download the extension files from the [GitHub repository](https://github.com/Atheric-Ai/exportgpt/releases/tag/v1.0.0).
 2. Open Mozilla Firefox and navigate to `about:debugging#/runtime/this-firefox`.
 3. Click on "Load Temporary Add-on" in the top right corner.
 4. Navigate to the folder containing the extension files and select the manifest.json file.
