@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "ExportGPT",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "Download and export conversations from ChatGPT, Claude, and Poe in multiple formats",
   "icons": {
     "16": "icons/icon16.png",
@@ -20,7 +20,8 @@
   "permissions": [
     "activeTab",
     "clipboardWrite",
-    "downloads"
+    "downloads",
+    "storage"
   ],
   "host_permissions": [
     "https://chat.openai.com/*",
@@ -41,6 +42,15 @@
   ],
   "background": {
     "service_worker": "background.js"
+  },
+  "commands": {
+    "quick_export": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+E",
+        "mac": "MacCtrl+Shift+E"
+      },
+      "description": "Export current chat"
+    }
   },
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'"
