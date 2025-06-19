@@ -31,14 +31,23 @@ const getCurrentSite = () => {
   });
 };
 
-document.addEventListener('DOMContentLoaded', getCurrentSite);
+document.addEventListener('DOMContentLoaded', () => {
+  getCurrentSite();
+  const autoSaveCheckbox = document.getElementById('autoSaveCheckbox');
+  browserAPI.storage.sync.get({ autoSave: false }, ({ autoSave }) => {
+    autoSaveCheckbox.checked = autoSave;
+  });
 
-document.getElementById('extractBtn').addEventListener('click', () => {
-  debugLog = [];
-  log('Starting conversation extraction...');
-  
-  const format = document.querySelector('input[name="format"]:checked').value;
-  log(`Selected format: ${format}`);
+  autoSaveCheckbox.addEventListener('change', (e) => {
+    browserAPI.storage.sync.set({ autoSave: e.target.checked });
+  });
+
+  document.getElementById('extractBtn').addEventListener('click', () => {
+    debugLog = [];
+    log('Starting conversation extraction...');
+
+    const format = document.querySelector('input[name="format"]:checked').value;
+    log(`Selected format: ${format}`);
 
   browserAPI.tabs.query({active: true, currentWindow: true}, (tabs) => {
     log(`Current URL: ${tabs[0].url}`);
@@ -64,11 +73,12 @@ document.getElementById('extractBtn').addEventListener('click', () => {
       }
     });
   });
-});
+  });
 
-document.getElementById('copyDebugBtn').addEventListener('click', () => {
-  const logText = debugLog.join('\n');
-  navigator.clipboard.writeText(logText)
-    .then(() => log('Debug log copied to clipboard.'))
-    .catch(err => log('Failed to copy debug log: ' + err));
+  document.getElementById('copyDebugBtn').addEventListener('click', () => {
+    const logText = debugLog.join('\n');
+    navigator.clipboard.writeText(logText)
+      .then(() => log('Debug log copied to clipboard.'))
+      .catch(err => log('Failed to copy debug log: ' + err));
+  });
 });

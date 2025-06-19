@@ -181,3 +181,35 @@ browserAPI.runtime.onMessage.addListener((request, sender, sendResponse) => {
     sendResponse({ platform: detectPlatform() });
   }
 });
+
+// Auto save feature
+(function initAutoSave() {
+  let autoSave = false;
+  let debounceTimer = null;
+
+  const scheduleSave = () => {
+    if (!autoSave) return;
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      extractConversation('markdown');
+    }, 3000);
+  };
+
+  browserAPI.storage.sync.get({ autoSave: false }, ({ autoSave: enabled }) => {
+    autoSave = enabled;
+  });
+
+  browserAPI.storage.onChanged.addListener(changes => {
+    if (changes.autoSave) {
+      autoSave = changes.autoSave.newValue;
+    }
+  });
+
+  const observer = new MutationObserver(mutations => {
+    if (mutations.some(m => m.addedNodes.length)) {
+      scheduleSave();
+    }
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
+})();

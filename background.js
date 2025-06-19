@@ -32,6 +32,20 @@ browserAPI.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   }
 });
 
+// Keyboard shortcut to export current chat in Markdown
+browserAPI.commands.onCommand.addListener(command => {
+  if (command === 'quick_export') {
+    browserAPI.tabs.query({ active: true, currentWindow: true }, tabs => {
+      if (tabs && tabs.length > 0) {
+        browserAPI.tabs.sendMessage(
+          tabs[0].id,
+          { action: 'extract', format: 'markdown' }
+        );
+      }
+    });
+  }
+});
+
 // Listen for messages from popup.js
 browserAPI.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "extract") {
